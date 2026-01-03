@@ -221,7 +221,7 @@ RUN <<EOT bash
     useradd -m -u "${USER_UID}" -g "${USER_GID}" -s /bin/bash vscode
   fi
 
-  # --- Bash completion dirs ---
+  # --- Bash completions dir ---
   gosu vscode bash -c 'mkdir -p /home/vscode/.local/share/bash-completion/completions'
 
   # --- Install dust ---
@@ -258,14 +258,11 @@ RUN <<EOT bash
   gosu vscode yq --version
 
   # --- Install Node ---
-  if [ "$TARGETARCH" = "amd64" ]; then
-    NODE_ARCH="x64"
-  elif [ "$TARGETARCH" = "arm64" ]; then
-    NODE_ARCH="arm64"
-  else
-    echo "Unsupported target platform architecture: ${TARGETARCH}"
-    exit 16
-  fi
+  case "${TARGETARCH}" in
+    amd64) NODE_ARCH=x64 ;;
+    arm64) NODE_ARCH=arm64 ;;
+    *) echo "Unsupported target platform architecture: ${TARGETARCH}" >&2; exit 16 ;;
+  esac;
   mkdir /opt/node
   curl -fsSLO --tlsv1.3 "https://nodejs.org/dist/${NODE_VERSION}/node-${NODE_VERSION}-linux-\$NODE_ARCH.tar.xz"
   curl -fsSL --tlsv1.3 -o /tmp/nodejs-keyring.kbx https://github.com/nodejs/release-keys/raw/HEAD/gpg/pubring.kbx
