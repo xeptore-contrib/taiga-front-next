@@ -199,7 +199,6 @@ RUN <<EOT bash
     fzf \
     gnupg2 \
     gosu \
-    httpie \
     iputils-ping \
     less \
     libicu74 \
