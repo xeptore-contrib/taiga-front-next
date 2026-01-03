@@ -173,7 +173,7 @@ ARG JQ_VERSION
 ARG JQ_SHA256_AMD64
 # jq-linux-arm64
 ARG JQ_SHA256_ARM64
-# https://nodejs.org/en/download
+# https://nodejs.org/en/download/archive/v12
 ARG NODE_VERSION
 
 WORKDIR /root
