@@ -98,7 +98,15 @@
   "workspaceMount": "type=bind,source=${localWorkspaceFolder},destination=/workspaces/taiga-front-next",
   "workspaceFolder": "/workspaces/taiga-front-next",
   "forwardPorts": [],
-  "portsAttributes": {},
+  "portsAttributes": {
+    "4200": {
+      "label": "Dev Server",
+      "onAutoForward": "openBrowser",
+      "elevateIfNeeded": false,
+      "protocol": "http",
+      "requireLocalPort": true
+    }
+  },
   "privileged": false,
   "containerUser": "vscode",
   "remoteUser": "vscode"
