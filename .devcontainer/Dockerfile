@@ -151,19 +151,27 @@ ARG USER_GID
 ARG TARGETARCH
 # https://github.com/bootandy/dust/releases
 ARG DUST_VERSION
+# dust-${DUST_VERSION}-aarch64-unknown-linux-gnu.tar.gz
 ARG DUST_SHA256_AMD64
+# dust-${DUST_VERSION}-x86_64-unknown-linux-gnu.tar.gz
 ARG DUST_SHA256_ARM64
 # https://github.com/sharkdp/bat/releases
 ARG BAT_VERSION
+# bat-${BAT_VERSION}-x86_64-unknown-linux-gnu.tar.gz
 ARG BAT_SHA256_AMD64
+# bat-${BAT_VERSION}-aarch64-unknown-linux-gnu.tar.gz
 ARG BAT_SHA256_ARM64
 # https://github.com/mikefarah/yq/releases
 ARG YQ_VERSION
+# yq_linux_amd64
 ARG YQ_SHA_AMD64
+# yq_linux_arm64
 ARG YQ_SHA_ARM64
 # https://github.com/jqlang/jq/releases
 ARG JQ_VERSION
+# jq-linux-amd64
 ARG JQ_SHA256_AMD64
+# jq-linux-arm64
 ARG JQ_SHA256_ARM64
 # https://nodejs.org/en/download
 ARG NODE_VERSION
@@ -230,7 +238,7 @@ RUN <<EOT bash
   fi
 
   # --- Bash completions dir ---
-  gosu vscode bash -c 'mkdir -p /home/vscode/.local/share/bash-completion/completions'
+  gosu vscode env --chdir=/home/vscode bash -lc 'mkdir -p /home/vscode/.local/share/bash-completion/completions'
 
   # --- Install dust ---
   case "${TARGETARCH}" in
@@ -244,7 +252,7 @@ RUN <<EOT bash
     arm64) DUST_SHA256=${DUST_SHA256_ARM64} ;;
     *) echo "Unsupported target platform architecture: ${TARGETARCH}" >&2; exit 16 ;;
   esac;
-  echo "${DUST_SHA256}  /root/dust-${DUST_VERSION}-\${DUST_ARCH}-unknown-linux-gnu.tar.gz" | sha256sum -c -
+  echo "\${DUST_SHA256}  /root/dust-${DUST_VERSION}-\${DUST_ARCH}-unknown-linux-gnu.tar.gz" | sha256sum -c -
   tar -xzf "/root/dust-${DUST_VERSION}-\${DUST_ARCH}-unknown-linux-gnu.tar.gz" --strip-components=1 -C /usr/local/bin/ "dust-${DUST_VERSION}-\${DUST_ARCH}-unknown-linux-gnu/dust"
   gosu vscode dust --version
   rm "/root/dust-${DUST_VERSION}-\${DUST_ARCH}-unknown-linux-gnu.tar.gz"
@@ -262,7 +270,7 @@ RUN <<EOT bash
     arm64) BAT_SHA256=${BAT_SHA256_ARM64} ;;
     *) echo "Unsupported target platform architecture: ${TARGETARCH}" >&2; exit 16 ;;
   esac;
-  echo "${BAT_SHA256}  /root/bat-${BAT_VERSION}-\${BAT_ARCH}-unknown-linux-gnu.tar.gz" | sha256sum
+  echo "\${BAT_SHA256}  /root/bat-${BAT_VERSION}-\${BAT_ARCH}-unknown-linux-gnu.tar.gz" | sha256sum
   tar -xzf "/root/bat-${BAT_VERSION}-\${BAT_ARCH}-unknown-linux-gnu.tar.gz" --strip-components=1 -C /tmp/bat "bat-${BAT_VERSION}-\${BAT_ARCH}-unknown-linux-gnu"
   mv /tmp/bat/bat /usr/local/bin/bat
   mv /tmp/bat/autocomplete/bat.bash /home/vscode/.local/share/bash-completion/completions/bat.bash
@@ -278,7 +286,7 @@ RUN <<EOT bash
     arm64) JQ_SHA256=${JQ_SHA256_ARM64} ;;
     *) echo "Unsupported target platform architecture: ${TARGETARCH}" >&2; exit 16 ;;
   esac;
-  echo "${JQ_SHA256}  /usr/local/bin/jq" | sha256sum
+  echo "\${JQ_SHA256}  /usr/local/bin/jq" | sha256sum
   chmod +x /usr/local/bin/jq
   gosu vscode jq --version
 
@@ -289,7 +297,7 @@ RUN <<EOT bash
     arm64) YQ_SHA256=${YQ_SHA_ARM64} ;;
     *) echo "Unsupported target platform architecture: ${TARGETARCH}" >&2; exit 16 ;;
   esac;
-  echo "${YQ_SHA256}  /usr/local/bin/yq" | sha256sum -c -
+  echo "\${YQ_SHA256}  /usr/local/bin/yq" | sha256sum -c -
   chmod +x /usr/local/bin/yq
   gosu vscode yq --version
 
@@ -309,9 +317,9 @@ RUN <<EOT bash
   rm /tmp/nodejs-keyring.kbx SHASUMS256.txt.asc SHASUMS256.txt "node-${NODE_VERSION}-linux-\$NODE_ARCH.tar.xz"
   PATH="\$PATH:/opt/node/bin"
   gosu vscode node --version
-  gosu vscode bash -c 'node --completion-bash > /home/vscode/.local/share/bash-completion/completions/node.bash'
+  gosu vscode env --chdir=/home/vscode bash -lc 'node --completion-bash > /home/vscode/.local/share/bash-completion/completions/node.bash'
   gosu vscode npm --version
-  gosu vscode bash -c 'npm completion bash > /home/vscode/.local/share/bash-completion/completions/npm.bash'
+  gosu vscode env --chdir=/home/vscode bash -lc 'npm completion bash > /home/vscode/.local/share/bash-completion/completions/npm.bash'
 
   # --- Cleanup ---
   apt-get purge -y gosu
