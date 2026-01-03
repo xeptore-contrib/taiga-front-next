@@ -188,6 +188,7 @@ RUN <<EOT bash
     less \
     libicu74 \
     locales \
+    nano \
     net-tools \
     netcat-openbsd \
     nload \
@@ -199,6 +200,7 @@ RUN <<EOT bash
     tree \
     unzip \
     util-linux \
+    vim \
     wget \
     xz-utils \
     zip
