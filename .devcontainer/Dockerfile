@@ -204,6 +204,7 @@ RUN <<EOT bash
     less \
     libicu74 \
     locales \
+    lsb-release \
     nano \
     net-tools \
     netcat-openbsd \
@@ -238,7 +239,7 @@ RUN <<EOT bash
   fi
 
   # --- Bash completions dir ---
-  gosu vscode env --chdir=/home/vscode bash -lc 'mkdir -p /home/vscode/.local/share/bash-completion/completions'
+  gosu vscode env --chdir=/home/vscode bash -c 'mkdir -p /home/vscode/.local/share/bash-completion/completions'
 
   # --- Install dust ---
   case "${TARGETARCH}" in
@@ -317,9 +318,9 @@ RUN <<EOT bash
   rm /tmp/nodejs-keyring.kbx SHASUMS256.txt.asc SHASUMS256.txt "node-${NODE_VERSION}-linux-\$NODE_ARCH.tar.xz"
   PATH="\$PATH:/opt/node/bin"
   gosu vscode node --version
-  gosu vscode env --chdir=/home/vscode bash -lc 'node --completion-bash > /home/vscode/.local/share/bash-completion/completions/node.bash'
+  gosu vscode env --chdir=/home/vscode bash -c 'node --completion-bash > /home/vscode/.local/share/bash-completion/completions/node.bash'
   gosu vscode npm --version
-  gosu vscode env --chdir=/home/vscode bash -lc 'npm completion bash > /home/vscode/.local/share/bash-completion/completions/npm.bash'
+  gosu vscode env --chdir=/home/vscode bash -c 'npm completion bash > /home/vscode/.local/share/bash-completion/completions/npm.bash'
 
   # --- Cleanup ---
   apt-get purge -y gosu
