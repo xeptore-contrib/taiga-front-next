@@ -11,9 +11,17 @@
       "USER_GID": "1000",
       "GIT_VERSION": "2.52.0",
       "DUST_VERSION": "v1.2.3",
+      "DUST_SHA256_AMD64": "f6a590a958a7fd1529fea7ae99b36be10158aa3a0ec0d686d83cc0ee89e9a142",
+      "DUST_SHA256_ARM64": "b6b78d8874635c18e651d69d95618f9e1eb9ecabcfc49338bc0f06ed43c7837a",
       "BAT_VERSION": "v0.26.1",
+      "BAT_SHA256_AMD64": "726f04c8f576a7fd18b7634f1bbf2f915c43494c1c0f013baa3287edb0d5a2a3",
+      "BAT_SHA256_ARM64": "422eb73e11c854fddd99f5ca8461c2f1d6e6dce0a2a8c3d5daade5ffcb6564aa",
       "YQ_VERSION": "v4.50.1",
+      "YQ_SHA_AMD64": "c7a1278e6bbc4924f41b56db838086c39d13ee25dcb22089e7fbf16ac901f0d4",
+      "YQ_SHA_ARM64": "cf0a663d8e4e00bb61507c5237b95b45a6aaa1fbedac77f4dc8abdadd5e2b745",
       "JQ_VERSION": "1.8.1",
+      "JQ_SHA256_AMD64": "020468de7539ce70ef1bceaf7cde2e8c4f2ca6c3afb84642aabc5c97d9fc2a0d",
+      "JQ_SHA256_ARM64": "6bc62f25981328edd3cfcfe6fe51b073f2d7e7710d7ef7fcdac28d4e384fc3d4",
       "NODE_VERSION": "v12.22.12"
     }
   },

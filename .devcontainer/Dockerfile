@@ -151,12 +151,20 @@ ARG USER_GID
 ARG TARGETARCH
 # https://github.com/bootandy/dust/releases
 ARG DUST_VERSION
+ARG DUST_SHA256_AMD64
+ARG DUST_SHA256_ARM64
 # https://github.com/sharkdp/bat/releases
 ARG BAT_VERSION
+ARG BAT_SHA256_AMD64
+ARG BAT_SHA256_ARM64
 # https://github.com/mikefarah/yq/releases
 ARG YQ_VERSION
+ARG YQ_SHA_AMD64
+ARG YQ_SHA_ARM64
 # https://github.com/jqlang/jq/releases
 ARG JQ_VERSION
+ARG JQ_SHA256_AMD64
+ARG JQ_SHA256_ARM64
 # https://nodejs.org/en/download
 ARG NODE_VERSION
 
@@ -230,8 +238,16 @@ RUN <<EOT bash
     arm64) DUST_ARCH=aarch64 ;;
     *) echo "Unsupported target platform architecture: ${TARGETARCH}" >&2; exit 16 ;;
   esac;
-  curl -fsSL --tlsv1.3 "https://github.com/bootandy/dust/releases/download/${DUST_VERSION}/dust-${DUST_VERSION}-\${DUST_ARCH}-unknown-linux-gnu.tar.gz" | tar -xzf - --strip-components=1 -C /usr/local/bin/ "dust-${DUST_VERSION}-\${DUST_ARCH}-unknown-linux-gnu/dust"
+  curl -fsSLO --tlsv1.3 "https://github.com/bootandy/dust/releases/download/${DUST_VERSION}/dust-${DUST_VERSION}-\${DUST_ARCH}-unknown-linux-gnu.tar.gz"
+  case "${TARGETARCH}" in
+    amd64) DUST_SHA256=${DUST_SHA256_AMD64} ;;
+    arm64) DUST_SHA256=${DUST_SHA256_ARM64} ;;
+    *) echo "Unsupported target platform architecture: ${TARGETARCH}" >&2; exit 16 ;;
+  esac;
+  echo "${DUST_SHA256}  /root/dust-${DUST_VERSION}-\${DUST_ARCH}-unknown-linux-gnu.tar.gz" | sha256sum -c -
+  tar -xzf "/root/dust-${DUST_VERSION}-\${DUST_ARCH}-unknown-linux-gnu.tar.gz" --strip-components=1 -C /usr/local/bin/ "dust-${DUST_VERSION}-\${DUST_ARCH}-unknown-linux-gnu/dust"
   gosu vscode dust --version
+  rm "/root/dust-${DUST_VERSION}-\${DUST_ARCH}-unknown-linux-gnu.tar.gz"
 
   # --- Install bat ---
   case "${TARGETARCH}" in
@@ -240,20 +256,40 @@ RUN <<EOT bash
     *) echo "Unsupported target platform architecture: ${TARGETARCH}" >&2; exit 16 ;;
   esac;
   mkdir /tmp/bat
-  curl -fsSL --tlsv1.3 "https://github.com/sharkdp/bat/releases/download/${BAT_VERSION}/bat-${BAT_VERSION}-\${BAT_ARCH}-unknown-linux-gnu.tar.gz" | tar -xzf - --strip-components=1 -C /tmp/bat "bat-${BAT_VERSION}-\${BAT_ARCH}-unknown-linux-gnu"
+  curl -fsSLO --tlsv1.3 "https://github.com/sharkdp/bat/releases/download/${BAT_VERSION}/bat-${BAT_VERSION}-\${BAT_ARCH}-unknown-linux-gnu.tar.gz"
+  case "${TARGETARCH}" in
+    amd64) BAT_SHA256=${BAT_SHA256_AMD64} ;;
+    arm64) BAT_SHA256=${BAT_SHA256_ARM64} ;;
+    *) echo "Unsupported target platform architecture: ${TARGETARCH}" >&2; exit 16 ;;
+  esac;
+  echo "${BAT_SHA256}  /root/bat-${BAT_VERSION}-\${BAT_ARCH}-unknown-linux-gnu.tar.gz" | sha256sum
+  tar -xzf "/root/bat-${BAT_VERSION}-\${BAT_ARCH}-unknown-linux-gnu.tar.gz" --strip-components=1 -C /tmp/bat "bat-${BAT_VERSION}-\${BAT_ARCH}-unknown-linux-gnu"
   mv /tmp/bat/bat /usr/local/bin/bat
   mv /tmp/bat/autocomplete/bat.bash /home/vscode/.local/share/bash-completion/completions/bat.bash
   rm -rf /tmp/bat
   chown vscode:vscode /home/vscode/.local/share/bash-completion/completions/bat.bash
   gosu vscode bat --version
+  rm "/root/bat-${BAT_VERSION}-\${BAT_ARCH}-unknown-linux-gnu.tar.gz"
 
   # --- Install jq ---
   curl -fsSL --tlsv1.3 "https://github.com/jqlang/jq/releases/download/jq-${JQ_VERSION}/jq-linux-${TARGETARCH}" -o /usr/local/bin/jq
+  case "${TARGETARCH}" in
+    amd64) JQ_SHA256=${JQ_SHA256_AMD64} ;;
+    arm64) JQ_SHA256=${JQ_SHA256_ARM64} ;;
+    *) echo "Unsupported target platform architecture: ${TARGETARCH}" >&2; exit 16 ;;
+  esac;
+  echo "${JQ_SHA256}  /usr/local/bin/jq" | sha256sum
   chmod +x /usr/local/bin/jq
   gosu vscode jq --version
 
   # --- Install yq ---
   curl -fsSL --tlsv1.3 "https://github.com/mikefarah/yq/releases/download/${YQ_VERSION}/yq_linux_${TARGETARCH}" -o /usr/local/bin/yq
+  case "${TARGETARCH}" in
+    amd64) YQ_SHA256=${YQ_SHA_AMD64} ;;
+    arm64) YQ_SHA256=${YQ_SHA_ARM64} ;;
+    *) echo "Unsupported target platform architecture: ${TARGETARCH}" >&2; exit 16 ;;
+  esac;
+  echo "${YQ_SHA256}  /usr/local/bin/yq" | sha256sum -c -
   chmod +x /usr/local/bin/yq
   gosu vscode yq --version
 
