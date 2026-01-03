@@ -272,10 +272,11 @@ RUN <<EOT bash
   sha256sum --check SHASUMS256.txt --ignore-missing
   tar -xJf "node-${NODE_VERSION}-linux-\$NODE_ARCH.tar.xz" -C /opt/node --strip-components=1
   rm /tmp/nodejs-keyring.kbx SHASUMS256.txt.asc SHASUMS256.txt "node-${NODE_VERSION}-linux-\$NODE_ARCH.tar.xz"
-  gosu vscode /opt/node/bin/node --version
-  gosu vscode bash -c '/opt/node/bin/node --completion-bash > /home/vscode/.local/share/bash-completion/completions/node.bash'
-  gosu vscode /opt/node/bin/npm --version
-  gosu vscode bash -c '/opt/node/bin/npm completion bash > /home/vscode/.local/share/bash-completion/completions/npm.bash'
+  PATH="\$PATH:/opt/node/bin"
+  gosu vscode node --version
+  gosu vscode bash -c 'node --completion-bash > /home/vscode/.local/share/bash-completion/completions/node.bash'
+  gosu vscode npm --version
+  gosu vscode bash -c 'npm completion bash > /home/vscode/.local/share/bash-completion/completions/npm.bash'
 
   # --- Cleanup ---
   apt-get purge -y gosu
