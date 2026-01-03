@@ -40,7 +40,47 @@
   "customizations": {
     "vscode": {
       "settings": {
-        "terminal.integrated.suggest.enabled": false
+        "terminal.integrated.suggest.enabled": false,
+        "cSpell.enabled": true,
+        "git.confirmSync": false,
+        "git.enableSmartCommit": false,
+        "git.autorefresh": true,
+        "git.openRepositoryInParentFolders": "never",
+        "search.followSymlinks": false,
+        "search.useIgnoreFiles": true,
+        "search.exclude": {
+          "**/node_modules": true,
+          "**/dist": true,
+          "**/build": true,
+          "**/.git": true
+        },
+        "files.watcherExclude": {
+          "**/node_modules/**": true,
+          "**/dist/**": true,
+          "**/build/**": true
+        },
+        "eslint.run": "onType",
+        "problems.showCurrentInStatus": true,
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "terminal.integrated.scrollback": 20000,
+        "editor.formatOnSave": true,
+        "editor.formatOnPaste": false,
+        "editor.formatOnType": false,
+        "editor.defaultFormatter": null,
+        "files.trimTrailingWhitespace": true,
+        "files.insertFinalNewline": true,
+        "files.eol": "\n",
+        "files.autoSave": "off",
+        "files.encoding": "utf8",
+        "editor.tabSize": 2,
+        "editor.insertSpaces": true,
+        "editor.detectIndentation": false,
+        "editor.renderWhitespace": "boundary",
+        "editor.renderControlCharacters": false,
+        "editor.minimap.enabled": false,
+        "git.detectSubmodules": false,
+        "git.autofetch": false,
+        "python.defaultInterpreterPath": "/opt/venv/bin/python"
       },
       "extensions": [
         "amodio.tsl-problem-matcher",
