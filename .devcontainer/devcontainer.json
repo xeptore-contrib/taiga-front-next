@@ -40,7 +40,6 @@
   "customizations": {
     "vscode": {
       "settings": {
-        "terminal.integrated.suggest.enabled": false,
         "cSpell.enabled": true,
         "git.confirmSync": false,
         "git.enableSmartCommit": false,
@@ -61,6 +60,8 @@
         },
         "eslint.run": "onType",
         "problems.showCurrentInStatus": true,
+        "terminal.integrated.suggest.enabled": false,
+        "terminal.integrated.copyOnSelection": true,
         "terminal.integrated.defaultProfile.linux": "bash",
         "terminal.integrated.scrollback": 20000,
         "editor.formatOnSave": true,
