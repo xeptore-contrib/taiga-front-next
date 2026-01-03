@@ -40,16 +40,16 @@
   "customizations": {
     "vscode": {
       "settings": {
-        "terminal.integrated.suggest.enabled": true
+        "terminal.integrated.suggest.enabled": false
       },
       "extensions": [
         "amodio.tsl-problem-matcher",
         "jeremyrajan.webpack",
         "ms-azuretools.vscode-containers",
         "ms-azuretools.vscode-docker",
+        "Orta.vscode-jest",
         "streetsidesoftware.code-spell-checker-persian",
-        "streetsidesoftware.code-spell-checker",
-        "Orta.vscode-jest"
+        "streetsidesoftware.code-spell-checker"
       ]
     }
   },
