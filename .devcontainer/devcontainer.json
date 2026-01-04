@@ -87,7 +87,8 @@
         "editor.minimap.enabled": false,
         "git.detectSubmodules": false,
         "git.autofetch": false,
-        "python.defaultInterpreterPath": "/opt/venv/bin/python"
+        "typescript.tsdk": "node_modules/typescript/lib",
+        "typescript.enablePromptUseWorkspaceTsdk": true
       },
       "extensions": [
         "anthropic.claude-code",
