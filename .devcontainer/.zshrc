@@ -1,7 +1,7 @@
 export ZSH="$HOME/.oh-my-zsh"
 
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+ZSH_THEME="half-life"
 CASE_SENSITIVE="true"
 
 zstyle ':omz:update' mode reminder
@@ -22,3 +22,4 @@ alias rimraf='rm -rf'
 alias dig='dig +noall +answer'
 alias clear='clear && clear'
 alias batp='bat -p'
+alias batpp='bat -pp'
