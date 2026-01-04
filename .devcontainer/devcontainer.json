@@ -73,6 +73,7 @@
         "editor.formatOnPaste": false,
         "editor.formatOnType": false,
         "editor.defaultFormatter": null,
+        "scm.defaultViewMode": "tree",
         "files.trimTrailingWhitespace": true,
         "files.insertFinalNewline": true,
         "files.eol": "\n",
