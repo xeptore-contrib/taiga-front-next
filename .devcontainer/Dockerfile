@@ -246,7 +246,7 @@ RUN <<EOT bash
     useradd -m -u "${USER_UID}" -g "${USER_GID}" -s /usr/bin/zsh vscode
   fi
 
-  # --- ZSH ---
+  # --- zsh ---
   gosu vscode mkdir -p /home/vscode/.oh-my-zsh
   gosu vscode bash -c "curl -sSfL https://github.com/ohmyzsh/ohmyzsh/archive/${OMZ_COMMIT}.tar.gz | tar -xzf - --strip-components=1 -C /home/vscode/.oh-my-zsh"
   gosu vscode mkdir -p /home/vscode/.oh-my-zsh/custom/plugins/zsh-autosuggestions
