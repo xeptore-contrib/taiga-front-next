@@ -22,7 +22,12 @@
       "JQ_VERSION": "1.8.1",
       "JQ_SHA256_AMD64": "020468de7539ce70ef1bceaf7cde2e8c4f2ca6c3afb84642aabc5c97d9fc2a0d",
       "JQ_SHA256_ARM64": "6bc62f25981328edd3cfcfe6fe51b073f2d7e7710d7ef7fcdac28d4e384fc3d4",
-      "NODE_VERSION": "v12.22.12"
+      "EZA_VERSION": "v0.23.4",
+      "EZA_SHA256_AMD64": "0a1c72faefcb511b08b1b8470aedf4a6a3a94c4d56f8f65da3cb7d8c5de051f1",
+      "EZA_SHA256_ARM64": "366e8430225f9955c3dc659b452150c169894833ccfef455e01765e265a3edda",
+      "NODE_VERSION": "v12.22.12",
+      "OMZ_COMMIT": "a79b37b95461ea2be32578957473375954ab31ff",
+      "ZSH_AUTOSUGGESTIONS_COMMIT": "85919cd1ffa7d2d5412f6d3fe437ebdbeeec4fc5"
     }
   },
   "runArgs": [
@@ -62,7 +67,7 @@
         "problems.showCurrentInStatus": true,
         "terminal.integrated.suggest.enabled": false,
         "terminal.integrated.copyOnSelection": true,
-        "terminal.integrated.defaultProfile.linux": "bash",
+        "terminal.integrated.defaultProfile.linux": "zsh",
         "terminal.integrated.scrollback": 20000,
         "editor.formatOnSave": true,
         "editor.formatOnPaste": false,
