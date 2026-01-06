@@ -38,7 +38,7 @@ export class HtmlEditorComponent implements AfterViewInit {
   @Input() lan = DEFAULT_CKEDITOR_LAN;
   @Input() placeholder = '';
 
-  // Legacy, use modern service instead of anguar.js
+  // Legacy, use modern service instead of angular.js
   @Input()
   public uploadFunction: (value?: unknown) => void;
 
