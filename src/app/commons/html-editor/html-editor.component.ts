@@ -165,7 +165,6 @@ export class HtmlEditorComponent implements AfterViewInit {
       },
     })
       .then((editor: any) => {
-        editor.ui.view.editable.element.setAttribute('dir', 'auto');
         this.editor = editor;
         this.editor.setData(this.html);
         editor.ui.focusTracker.on(
