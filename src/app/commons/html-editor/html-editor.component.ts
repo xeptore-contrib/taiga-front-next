@@ -179,7 +179,7 @@ export class HtmlEditorComponent implements AfterViewInit {
           this.changed.emit(this.html);
         });
 
-        // Hide switch tranform to table header row because it doesn't have markdown equivalent
+        // Hide switch transform to table header row because it doesn't have markdown equivalent
         this.hideTableHederRowSwitch();
       })
       .catch((error: any) => {
@@ -252,14 +252,14 @@ export class HtmlEditorComponent implements AfterViewInit {
 
   private getEmojis(search: string) {
     return new Promise((resolve) => {
-      const emojisFiltred = Object.entries(emojis)
+      const emojisFiltered = Object.entries(emojis)
         .filter(([keyword]) => keyword.includes(search))
         .map(([keyword, character]) => {
           return { id: `:${keyword}:`, text: character };
         })
         .slice(0, 10);
 
-      resolve(emojisFiltred);
+      resolve(emojisFiltered);
     });
   }
 
