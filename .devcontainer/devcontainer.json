@@ -36,7 +36,7 @@
   },
   "runArgs": [
     "--name=taiga-front-next-dev",
-    "--hostname=dev-taiga-front-next",
+    "--hostname=taiga-front-next-dev",
     "--cap-drop=ALL"
   ],
   "capAdd": [
